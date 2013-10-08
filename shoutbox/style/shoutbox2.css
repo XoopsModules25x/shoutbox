@@ -1,0 +1,82 @@
+/* Odd and even setting allow for different background colors*/
+	/* to toggle between messages providing clear separation*/
+	/* Background 1 of the Table*/
+.odd {
+	background-color: #e8c8e8;
+}
+
+/* Background 2 of the Table*/
+.even {
+	background-color: #c0c0ff;
+}
+
+/* Style of the quote */
+.xoopscode,.xoopsquote {
+	background: #eeeeee;
+}
+
+/* link style */
+a:link,a:visited {
+	color: #0000FF;
+	font-family: Verdana, Arial, "MS Sans Serif";
+	font-size: x-small;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #800080;
+	font-family: Verdana, Arial, "MS Sans Serif";
+	font-size: x-small;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #FF0000;
+	font-family: Verdana, Arial, "MS Sans Serif";
+	font-size: x-small;
+	text-decoration: underline;
+}
+
+/*body & formstyle*/
+form,body {
+	background-color: #bbbbbb;
+	border: 1px #000000;
+	color: #000000;
+	font-family: Verdana, Arial, "MS Sans Serif";
+	font-size: x-small;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*font style of the shout block table*/
+td {
+	font-size: x-small;
+}
+
+/*message area of the shoutframe*/
+.sideboxcontent {
+	font-size: x-small;
+	align: left;
+	padding-left: 5px;
+}
+
+/*powered by CVD link at bottom of shout block*/
+.blockfooter {
+	font-size: xx-small;
+	align: right;
+}
+
+/*style for form elements*/
+select,input,option,textarea {
+	font-family: Verdana, Arial, "MS Sans Serif";
+	font-size: x-small;
+}
+
+frame1,frame2 {
+	border: 1px #000000;
+}
+
+/*setting so horizontal scroll bar will not appear if not necessary*/
+iframe {
+	overflow-x: hidden;
+}
