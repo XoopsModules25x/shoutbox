@@ -37,6 +37,7 @@ function shoutbox_getOption($option, $dirname = 'shoutbox')
         }
     }
     $modOptions[$option] = $ret;
+
     return $ret;
 }
 
@@ -47,6 +48,7 @@ function shoutbox_makeGuestName()
     $iparr = explode('.', $ipadd);
     $ipadd = $iparr[0] + $iparr[1] + $iparr[2] + $iparr[3];
     $guestname = $xoopsConfig['anonymous'] . $ipadd;
+
     return $guestname;
 }
 
@@ -54,6 +56,7 @@ function shoutbox_getUserName($uid = 0)
 {
     xoops_load('XoopsUserUtility');
     $uname = XoopsUserUtility::getUnameFromId($uid, shoutbox_getOption('user_realname'));
+
     return $uname;
 }
 
@@ -65,11 +68,13 @@ function shoutbox_setCookie($timestamp)
 {
     if (empty($_COOKIE['shoutcookie'])) {
         setcookie("shoutcookie", $timestamp);
+
         return false;
     }
 
     if ($_COOKIE['shoutcookie'] < $timestamp) {
         setcookie("shoutcookie", $timestamp);
+
         return TRUE;
     } else {
         return FALSE;
@@ -84,6 +89,7 @@ function shoutbox_ircLike($command)
         $special_stuff_head .= '<script language="javascript">';
         $special_stuff_head .= '    top.window.close();';
         $special_stuff_head .= '</script>';
+
         return true;
     }
     $commandlines=explode(' ',$command);
@@ -97,6 +103,7 @@ function shoutbox_ircLike($command)
                         $special_stuff_head .= '<script language="javascript">';
                         $special_stuff_head .= '    top.document.location.href="popup.php?username='.htmlentities($commandlines[1], ENT_QUOTES).'";';
                         $special_stuff_head .= '</script>';
+
                         return true;
                     } else {
                         return true;
@@ -105,6 +112,6 @@ function shoutbox_ircLike($command)
             }
         }
     }
+
     return false;
 }
-?>

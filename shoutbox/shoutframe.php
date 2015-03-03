@@ -75,7 +75,6 @@ if ($isMessage && ($isUser || $isAnonymous)) {
     }
 }
 
-
 $shouts = $shoutbox->getShouts(0, $xoopsModuleConfig['allow_bbcode'], $xoopsModuleConfig['maxshouts_view']);
 
 if (!empty($shouts)) {
@@ -86,4 +85,3 @@ $xoopsTpl->assign('config', $xoopsModuleConfig);
 
 $xoopsTpl->xoops_setCaching(0);
 $xoopsTpl->display('db:shoutbox_shoutframe.html');
-?>

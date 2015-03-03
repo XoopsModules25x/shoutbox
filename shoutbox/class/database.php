@@ -79,6 +79,7 @@ class ShoutboxDatabaseHandler extends XoopsPersistableObjectHandler
         $criteria->setOrder('DESC');
         $criteria->setStart(0);
         $criteria->setLimit($limit);
+
         return $this->getObjects($criteria);
     }
 
@@ -92,6 +93,7 @@ class ShoutboxDatabaseHandler extends XoopsPersistableObjectHandler
         $objs = $this->getList($criteria, true);
         unset($criteria);
         $criteria = new Criteria('id', '(' . implode(',', array_keys($objs)) . ')', 'NOT IN');
+
         return $this->deleteAll($criteria);
     }
 
@@ -105,7 +107,7 @@ class ShoutboxDatabaseHandler extends XoopsPersistableObjectHandler
         $myts =& MyTextSanitizer::getInstance();
         $criteria = new CriteriaCompo(new Criteria('message', $myts->addSlashes($message)));
         $criteria->add(new Criteria('ip', $ip));
+
         return $this->getCount($criteria) ? true : false;
     }
 }
-?>

@@ -150,6 +150,6 @@ function rmdirr($dirname)
 
     // Clean up
     $dir->close();
+
     return rmdir($dirname);
 }
-?>

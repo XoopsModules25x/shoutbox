@@ -46,4 +46,3 @@ if (is_file('style/shoutbox.css')) {
 } else {
     $xoopsTpl->assign('themecss', xoops_getcss());
 }
-?>

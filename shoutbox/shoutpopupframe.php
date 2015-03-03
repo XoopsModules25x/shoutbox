@@ -48,7 +48,6 @@ $lastmine=0;
 $double=0;
 $newmessage=0;
 
-
 $addit = true;
 $double = false;
 $message = !empty($_POST['message']) ? trim($_POST['message']) : '';
@@ -148,4 +147,3 @@ $xoopsTpl->assign('config', $xoopsModuleConfig);
 
 $xoopsTpl->xoops_setCaching(0);
 $xoopsTpl->display('db:shoutbox_popupframe.html');
-?>

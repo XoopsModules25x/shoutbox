@@ -56,4 +56,3 @@ $xoopsTpl->assign('config', $xoopsModuleConfig);
 
 $xoopsTpl->xoops_setCaching(0);
 $xoopsTpl->display('db:shoutbox_popup.html');
-?>

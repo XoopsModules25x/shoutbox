@@ -108,4 +108,3 @@ $size_file bytes
 </tbody>
 </table>
 ";
-?>

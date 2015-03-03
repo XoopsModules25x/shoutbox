@@ -24,11 +24,9 @@ include_once 'admin_header.php';
 // Admin!
 
 
-
 function shoutboxDefault()
 {
     global $xoopsModuleConfig;
-
 
     if($xoopsModuleConfig['storage_type'] == 'database') {
         $database = '['._AM_SH_EDIT_INUSE.']';
@@ -136,4 +134,4 @@ switch ($op){
 }
 include_once 'admin_footer.php';
 //xoops_cp_footer();
-//?>
+//;

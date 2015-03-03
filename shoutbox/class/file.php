@@ -79,6 +79,7 @@ class ShoutboxFileHandler extends XoopsPersistableObjectHandler
         $obj->getVar('ip', 'n') . '|' .
         $obj->getVar('uid', 'n') . "\n");
         fclose($f);
+
         return true;
     }
 
@@ -105,6 +106,7 @@ class ShoutboxFileHandler extends XoopsPersistableObjectHandler
             unset($obj);
             $i++;
         }
+
         return $objs;
     }
 
@@ -122,6 +124,7 @@ class ShoutboxFileHandler extends XoopsPersistableObjectHandler
             }
             fclose($f);
         }
+
         return true;
     }
 
@@ -129,6 +132,7 @@ class ShoutboxFileHandler extends XoopsPersistableObjectHandler
     {
         $f = fopen($this->csvfile, 'w');
         fclose($f);
+
         return true;
     }
 
@@ -144,7 +148,7 @@ class ShoutboxFileHandler extends XoopsPersistableObjectHandler
                 }
             }
         }
+
         return false;
     }
 }
-?>

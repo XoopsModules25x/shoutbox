@@ -90,4 +90,3 @@ if (!empty($_POST['confirm']) && $_POST['confirm'] == 'yes') {
     </form>
     ";
 }
-?>

@@ -93,5 +93,3 @@ echo "
 <tbody>
 </table>
 </form>";
-
-?>

@@ -64,5 +64,3 @@ function b_shoutbox_show($options)
 
     return $block;
 }
-
-?>

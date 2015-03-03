@@ -18,14 +18,12 @@
  * @version    $Id $
  */
 
-
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/include/cp_header.php';
 include_once dirname(__FILE__) . '/admin_header.php';
 
 xoops_cp_header();
 
-	$indexAdmin = new ModuleAdmin();
-
+    $indexAdmin = new ModuleAdmin();
 
 global $xoopsModuleConfig;
 
@@ -49,7 +47,6 @@ if($xoopsModuleConfig['storage_type'] == 'database') {
     $indexAdmin->addInfoBoxLine(_AM_SHOUTBOX_CURRENT_SELECTION,
         $imgFile."<a href='main.php?op=shoutboxFile'>" . _AM_SH_EDIT_FILE . "</a> $file", 0, 'Green'    );
 }
-
 
     echo $indexAdmin->addNavigation('index.php');
     echo $indexAdmin->renderIndex();
