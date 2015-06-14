@@ -110,4 +110,3 @@ define("_MI_SHOUTBOX_OP46_B", "Disable Captcha");
 define("_MI_SHOUTBOX_OP46_C", "Enable Frameworks Captcha");
 define("_MI_SHOUTBOX_OP46_D", "Enable Core Captcha");
 define('_MI_SHOUTBOX_EMPTY', '');
-?>

@@ -42,12 +42,9 @@ $obj->setVar('uname', $_POST['shoutboxUname']);
 $obj->setVar('ip', $_POST['shoutboxIp']);
 $obj->setVar('message', $_POST['shoutboxMessage']);
 
-
 // Execute query
 if ($handler->insert($obj)) {
     redirect_header("index.php", 2, "Shout updated!");
 } else {
     redirect_header("index.php", 4, "Error - Could not execute query...");
 }
-
-?>

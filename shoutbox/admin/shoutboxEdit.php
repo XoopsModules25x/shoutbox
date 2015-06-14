@@ -40,7 +40,6 @@ if (!$obj = $handler->get($id)) {
     redirect_header("index.php", 3, _AM_SH_INVALID_ID);
 }
 
-
 // Make code ready for preview
 $shout = $obj->getValues();
 $shout['date'] = $obj->time(_DATESTRING);
@@ -95,4 +94,3 @@ echo "
 </table>
 </form>
 ";
-?>

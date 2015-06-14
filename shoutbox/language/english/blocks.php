@@ -13,4 +13,3 @@ define("_MB_SHOUTBOX_SHOUT_TITLE", "Shout");
 define("_MB_SHOUTBOX_NICK", "Nick");
 
 define("_MB_SHOUTBOX_CONFIRMDEL", "Are you sure you want to remove all posts in database/file?");
-?>

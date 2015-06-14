@@ -37,6 +37,7 @@ class Shoutbox
         } else {
             $avatar = XOOPS_URL . '/uploags/blank.gif';
         }
+
         return $avatar;
     }
 
@@ -97,6 +98,7 @@ class Shoutbox
             }
             $i++;
         }
+
         return $shouts;
     }
 
@@ -105,6 +107,7 @@ class Shoutbox
         if ($limit > 0) {
             return $this->handler->pruneShouts($limit);
         }
+
         return false;
     }
 
@@ -114,6 +117,7 @@ class Shoutbox
         if (!empty($xoopsUser) && $xoopsUser->isAdmin()) {
             return $this->handler->deleteShouts();
         }
+
         return false;
     }
 
@@ -123,4 +127,3 @@ class Shoutbox
     }
 
 }
-?>

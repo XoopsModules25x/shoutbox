@@ -68,4 +68,3 @@ while (list($msg_id, $user_id, $uname, $time, $ip, $message) = $xoopsDB->fetchRo
 }
 
 echo "<tr class='foot'><td colspan='4'>&nbsp;</td></tr></table>";
-?>
