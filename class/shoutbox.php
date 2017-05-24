@@ -43,7 +43,7 @@ class Shoutbox
 
     function saveShout($uid, $uname, $message)
     {
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
         $obj = $this->handler->createShout();
         $obj->setVar('uid', $uid);
         $obj->setVar('uname', $uname);
@@ -62,7 +62,7 @@ class Shoutbox
     {
         global $xoopsUser;
         $shouts = array();
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
         $objs = $this->handler->getShouts($limit);
         $i = 0;
         foreach ($objs as $obj) {
