@@ -1,18 +1,48 @@
----------------------------------------
-5.01 Final  2013-08-10
----------------------------------------
+<h5>5.02 Beta 2       [2017-07-11]</h5>
+<hr>
+- XOOPS 2.5.9, PHP 7 (mamba)
+- removed @version (mamba)
+- fixed issue #5: not working for custom group (myblackrx/mamba)
+- Updates for PayPal changes (zyspec)
+- PSR-2 code cosmetics (mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- replaced < br /> with < br > (mamba)
+- Unnecessary double quotes (mamba)
+- reference mismatch (mamba)
+- Hardening to type safe (mamba)
+- update Help (mamba)
+- changed _handler to Handler (mamba)
+- removed '/' from void HTML elements (&lt;br&gt;, &lt;img&gt;, etc) (mamba)
+- added Contributing.md (mamba)
+- renamed several $indexAdmin with $adminObject for consistency (mamba)
+- added install checks for PHP 5.5 and XOOPS 2.5.8 (mamba)
+- added auto-creation of upload folders (mamba)
+- moved functions to Utility class (mamba)
+- PHP 5 type casting (mamba)
+- started conversion to XMF (mamba)
+    &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
+    &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)
+    &nbsp;&nbsp;- changed to ->displayButton('left') (mamba)
+
+<h5>5.02 Beta 1       [2014-04-23]</h5>
+<hr>
+- moved all images, CSS, and JS files to /assets (mamba)
+- renamed .html Smarty templates to .tpl (mamba)
+
+
+<h5>5.01 Final  [2013-08-10]</h5>
+<hr>
 - cosmetic changes in Preferences (mamba)
 
----------------------------------------
-5.01 Beta 1  2012-07-30
----------------------------------------
 
+<h5>5.01 Beta 1  [2012-07-30]</h5>
+<hr>
 - Converted to XOOPS 2.5.5 Admin GUI (Mamba)
 
----------------------------------------
-5.00 Final  2010-01-24
----------------------------------------
 
+<h5>5.00 Final  [2010-01-24]</h5>
+<hr>
 - Converted to Blue Move (Trabis)
 - Classes were added and a lot of the code was rewritten.
 
@@ -22,15 +52,14 @@ Database has changed so please do not upload this package over the old shoutbox.
 - Upload new files
 - Install Shoutbox
 
-****************************************************************************
 
-         Shoutbox v4.05 Release| Xoops Module by Tank | Dec 15, 2008
-         Website: http://www.customvirtualdesigns.com
+<h5>4.05  [2008-12-15]</h5>
+<hr>
+- updates by Tank (Website: http://www.customvirtualdesigns.com)
 
-****************************************************************************
 
-Initial release 4.01  10/05/2008
-
+<h5>Initial release 4.01  [10/05/2008]</h5>
+<hr>
  - Posted messages can be stored in database table or csv file
  - All components of message entry are routed through sanitizer prior to storage
  - Dynamic resizing of pop-up window has been disabled until further testing
@@ -39,15 +68,15 @@ Initial release 4.01  10/05/2008
    length limit
  - Display of registered user's avatar included in standard message block
  - OnUpdate function provided so database table will be created (if
-   necessary) when updating from version 4.0 beta
+   necessary) when updating from 4.0 beta
 
- NOTE: If your current version of Shoutbox is earlier than v4.0 beta, it is
+ NOTE: If your current of Shoutbox is earlier than v4.0 beta, it is
  not known whether performing a module update will work properly. Our
  recommendation would be to uninstall the current Shoutbox module and
  perform a New Install.
 
-Update Release 4.02  11/01/2008
-
+<h5>Update Release 4.02  [11/01/2008]</h5>
+<hr>
  - Bug Fix: Typo in include/class.php causing some file storage processing
    to be performed incorrectly
  - Add guest avatar
@@ -59,8 +88,8 @@ Update Release 4.02  11/01/2008
  - Enable module style sheet so user can customize appearance
  - Change Refresh and Popup from links to buttons in Shoutbox block
 
-Update Release 4.03  11/15/2008
-
+<h5>Update Release 4.03  [11/15/2008]</h5>
+<hr>
  - Bug Fix: Update text sanitizer functions to eliminate debug deprecated message
  - Add wordwrap preference parameter for controlling message line display length
  - Update style sheet to coincide with wordwrap feature so horizontal scroll bar
@@ -70,8 +99,8 @@ Update Release 4.03  11/15/2008
  - Remove local copy of captcha class.
  - Add captcha support for Frameworks/captcha class.
 
-Update Release 4.04  12/01/2008
-
+<h5>Update Release 4.04  [12/01/2008]</h5>
+<hr>
  - Clean up some minor defects generating notices in debug mode
  - Bug Fix: Add passing UID to template to correct page refresh problem
  - Redefine how refresh works similar to the way it was in v4.02
@@ -86,8 +115,8 @@ Update Release 4.04  12/01/2008
    is placed in the avatar location.
  - Add option for disable/enable sound on new message when using popup window
 
-Update Release 4.05  12/15/2008
-
+<h5>Update Release 4.05  [12/15/2008]</h5>
+<hr>
  - Add padding to sideboxcontent in module style sheet to provide some space
    between avatars and message text
  - Add javascript code in shoutframe and popupframe templates so URL's, when
@@ -99,8 +128,8 @@ Update Release 4.05  12/15/2008
  - Improve text sanitizing used in storing and retrieving messages
  - Eliminate extra line feeds in text entry when stored as File type
 
-Credits:
-========
+<h5>Credits:</h5>
+<hr>
 At the very beginning this module was developed for e-xoops aka runcms (XOOPS fork) but I ported it to XOOPS and never stopped porting... ;-)
 
 Thx for everything...
@@ -113,8 +142,8 @@ And those who helped developing me with shoutbox...
 - Masterprut [fueldump.de]: Helped me with those stupid javascript security measures (read: my scripting skills).
 - Ackbarr: Small things, together big!
 
-Version 4.0 Beta
-================
+<h5>4.0 Beta</h5>
+<hr>
 * Fixed: Fixed XHTML so Tidy loves it (Thx to Wizanda [wizanda.co.uk] & Masterprut [fueldump.de])
 * Fixed: Javascript optimized so it isn't a mess anymore.
 
@@ -128,31 +157,31 @@ Version 4.0 Beta
 * Todo: Fix known problem with popup for users that use crappy browser (aka IE)
 * Todo: Fix unknown bugs :-)
 
-Version 3.2:
-============
+<h5>3.2:</h5>
+<hr>
 * Fixed: Anonymous users could post when generating own form
 
-Version 3.1:
-============
+<h5>3.1:</h5>
+<hr>
 * Fixed: Possible warning in popup.
 * Fixed: Wrong variable selection in popupframe
 * Fixed: Forgot ":" after anonymous name...
 
 * Changed: If you now deselect "guest" may post and block is visible to guests they will see the shouts but won't be able to add. This option gots now a logic!
-* Changed: Almost all repeated actions are now packed in one class. This will speedy the conversion to a sql version.
+* Changed: Almost all repeated actions are now packed in one class. This will speedy the conto a sql version.
 
 * Added: You got now a maxview function. This is seperated from the trim function.
 
-Install Notes:
-==============
-Deactivate, uninstall, remove folder if you upgrade from older version. Then upload new version and install. Be sure to set the Order of the Module to hide. (System Admin - Modules - Height -> '0')
+<h5>Install Notes:</h5>
+<hr>
+Deactivate, uninstall, remove folder if you upgrade from older version. Then upload new and install. Be sure to set the Order of the Module to hide. (System Admin - Modules - Height -> '0')
 
 If you set the access rights be sure to change the rights for the block and the main - THIS IS NECESSARY -, if you just allow access to the Block, the groupmembers wont see the frame content, instead of this the shoutbox will load the non acess page and in the non access page there will be another shoutbox clone again and that will also display the no access page ...
 
-If you want to use a custom theme for the shoutbox, rename the the file style/shoutbox.temp.css to style/shoutbox.css and change it so it will fit your needs.
+If you want to use a custom theme for the shoutbox, rename the the file assets/css/shoutbox2.css to assets/css/shoutbox.css and change it so it will fit your needs.
 
-Help:
-=====
+<h5>Help:</h5>
+<hr>
 1. My database is really BIG even with trimming enabled?
 --------------------------------------------------------
 Known problem. Shoutbox will ignore the trimming function when your select the database as your favorite storage method. This should be fixed in the next version. For now: live with or execute query "DELETE * FROM shoutbox WHERE time < ...".

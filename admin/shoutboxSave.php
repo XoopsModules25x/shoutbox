@@ -16,24 +16,23 @@
  * @author          Alphalogic <alphafake@hotmail.com>
  * @author          tank <tanksplace@comcast.net>
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: shoutboxSave.php 0 2010-01-29 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_MAINFILE_INCLUDED") || !strstr($_SERVER['PHP_SELF'], 'admin/main.php')) {
+if (!defined('XOOPS_MAINFILE_INCLUDED') || false === strpos($_SERVER['PHP_SELF'], 'admin/main.php')) {
     exit();
 }
 
 $handler = xoops_getModuleHandler('database', 'shoutbox');
 
-$id = intval($_POST['id']);
+$id = (int)$_POST['id'];
 if (!$obj = $handler->get($id)) {
     /**
      * Or we got none, or something really strange happend here...
      */
-    redirect_header("index.php", 3, _AM_SH_INVALID_ID);
+    redirect_header('index.php', 3, _AM_SH_INVALID_ID);
 }
 
-if (!preg_match("/^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}$/", $_POST['shoutboxIp'])) {
+if (!preg_match('/^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}$/', $_POST['shoutboxIp'])) {
     // This check is far from perfect but...
     exit('Whoops! [ERROR 24]');
 }
@@ -44,7 +43,7 @@ $obj->setVar('message', $_POST['shoutboxMessage']);
 
 // Execute query
 if ($handler->insert($obj)) {
-    redirect_header("index.php", 2, "Shout updated!");
+    redirect_header('index.php', 2, 'Shout updated!');
 } else {
-    redirect_header("index.php", 4, "Error - Could not execute query...");
+    redirect_header('index.php', 4, 'Error - Could not execute query...');
 }

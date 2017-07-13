@@ -17,62 +17,77 @@
  * @package         Shoutbox
  * @since           5.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: db.php 0 2010-01-06 18:47:04Z trabis $
  */
-
-defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
+// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 class ShoutboxDatabase extends XoopsObject
 {
     /**
      * constructor
      */
-    function ShoutboxDatabase()
+    public function __construct()
     {
-        $this->initVar("id", XOBJ_DTYPE_INT);
-        $this->initVar("uid", XOBJ_DTYPE_INT);
-        $this->initVar("uname", XOBJ_DTYPE_TXTBOX);
-        $this->initVar("time", XOBJ_DTYPE_STIME);
-        $this->initVar("ip", XOBJ_DTYPE_TXTBOX);
-        $this->initVar("message", XOBJ_DTYPE_TXTAREA);
+        $this->initVar('id', XOBJ_DTYPE_INT);
+        $this->initVar('uid', XOBJ_DTYPE_INT);
+        $this->initVar('uname', XOBJ_DTYPE_TXTBOX);
+        $this->initVar('time', XOBJ_DTYPE_STIME);
+        $this->initVar('ip', XOBJ_DTYPE_TXTBOX);
+        $this->initVar('message', XOBJ_DTYPE_TXTAREA);
 
-        $this->initVar("dohtml", XOBJ_DTYPE_INT, 0);
-        $this->initVar("doxcode", XOBJ_DTYPE_INT, 0);
-        $this->initVar("dosmiley", XOBJ_DTYPE_INT, 1);
-        $this->initVar("doimage", XOBJ_DTYPE_INT, 1);
-        $this->initVar("dobr", XOBJ_DTYPE_INT, 0);
+        $this->initVar('dohtml', XOBJ_DTYPE_INT, 0);
+        $this->initVar('doxcode', XOBJ_DTYPE_INT, 0);
+        $this->initVar('dosmiley', XOBJ_DTYPE_INT, 1);
+        $this->initVar('doimage', XOBJ_DTYPE_INT, 1);
+        $this->initVar('dobr', XOBJ_DTYPE_INT, 0);
     }
 
-    function time($dateFormat = 's', $format = 'S')
+    /**
+     * @param string $dateFormat
+     * @param string $format
+     * @return string
+     */
+    public function time($dateFormat = 's', $format = 'S')
     {
         return formatTimestamp($this->getVar('time', $format), $dateFormat);
     }
-
 }
 
+/**
+ * Class ShoutboxDatabaseHandler
+ */
 class ShoutboxDatabaseHandler extends XoopsPersistableObjectHandler
 {
-    function ShoutboxDatabaseHandler(&$db)
-    {
-        $this->__construct($db);
-    }
-
-    function __construct($db)
+    /**
+     * ShoutboxDatabaseHandler constructor.
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(XoopsDatabase $db)
     {
         parent::__construct($db, 'shoutbox', 'ShoutboxDatabase', 'id', 'uid');
     }
 
-    function createShout()
+    /**
+     * @return \XoopsObject
+     */
+    public function createShout()
     {
         return $this->create();
     }
 
-    function saveShout($obj)
+    /**
+     * @param $obj
+     * @return mixed
+     */
+    public function saveShout($obj)
     {
         return $this->insert($obj);
     }
 
-    function getShouts($limit)
+    /**
+     * @param $limit
+     * @return array
+     */
+    public function getShouts($limit)
     {
         $criteria = new CriteriaCompo();
         $criteria->setSort('time');
@@ -83,7 +98,11 @@ class ShoutboxDatabaseHandler extends XoopsPersistableObjectHandler
         return $this->getObjects($criteria);
     }
 
-    function pruneShouts($limit)
+    /**
+     * @param $limit
+     * @return bool
+     */
+    public function pruneShouts($limit)
     {
         $criteria = new CriteriaCompo();
         $criteria->setSort('id');
@@ -97,14 +116,22 @@ class ShoutboxDatabaseHandler extends XoopsPersistableObjectHandler
         return $this->deleteAll($criteria);
     }
 
-    function deleteShouts()
+    /**
+     * @return bool
+     */
+    public function deleteShouts()
     {
         return $this->deleteAll();
     }
 
-    function shoutExists($message, $ip)
+    /**
+     * @param $message
+     * @param $ip
+     * @return bool
+     */
+    public function shoutExists($message, $ip)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts     = MyTextSanitizer::getInstance();
         $criteria = new CriteriaCompo(new Criteria('message', $myts->addSlashes($message)));
         $criteria->add(new Criteria('ip', $ip));
 

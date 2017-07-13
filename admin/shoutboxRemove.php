@@ -16,21 +16,20 @@
  * @author          Alphalogic <alphafake@hotmail.com>
  * @author          tank <tanksplace@comcast.net>
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: shoutboxRemove.php 0 2010-01-29 18:47:04Z trabis $
  */
-if (!defined("XOOPS_MAINFILE_INCLUDED") || !strstr($_SERVER['PHP_SELF'], 'admin/main.php')) {
+if (!defined('XOOPS_MAINFILE_INCLUDED') || false === strpos($_SERVER['PHP_SELF'], 'admin/main.php')) {
     exit();
 }
-$id = intval($_REQUEST['id']);
+$id      = (int)$_REQUEST['id'];
 $handler = xoops_getModuleHandler('database', 'shoutbox');
 // Request or confirmation?
-if (!empty($_POST['confirm']) && $_POST['confirm'] == 'yes') {
+if (!empty($_POST['confirm']) && $_POST['confirm'] === 'yes') {
     // Sanitize inputs
     $obj = $handler->get($id);
     if (is_object($obj) && $handler->delete($obj)) {
-        redirect_header("index.php", 2, _AM_SH_REMOVE_SUCCES);
+        redirect_header('index.php', 2, _AM_SH_REMOVE_SUCCES);
     } else {
-        redirect_header("index.php", 4, _AM_SH_REMOVE_FAILURE);
+        redirect_header('index.php', 4, _AM_SH_REMOVE_FAILURE);
     }
 } else {
     xoops_cp_header();
@@ -39,23 +38,23 @@ if (!empty($_POST['confirm']) && $_POST['confirm'] == 'yes') {
         /**
          * Or we got none, or something really strange happend here...
          */
-        redirect_header("index.php", 3, _AM_SH_INVALID_ID);
+        redirect_header('index.php', 3, _AM_SH_INVALID_ID);
     }
 
     // Make code ready for preview
-    $shout = $obj->getValues();
+    $shout         = $obj->getValues();
     $shout['date'] = $obj->time(_DATESTRING);
 
     echo "
-    <form action='index.php?op=shoutboxRemove' method='post'>
+    <form action='main.php?op=shoutboxRemove' method='post'>
     <table width='100%' class='outer' cellspacing='1'>
     <tbody>
     <tr>
-    <th colspan='2'>".sprintf(_AM_SH_REMOVE_TITLE, $shout['date'])."</th>
+    <th colspan='2'>" . sprintf(_AM_SH_REMOVE_TITLE, $shout['date']) . "</th>
     </tr>
     <tr valign='top' align='left'>
     <td class='odd'>
-    <b>"._AM_SH_POSTER."</b>
+    <b>" . _AM_SH_POSTER . "</b>
     </td>
     <td class='even'>
     $shout[uname]
@@ -63,7 +62,7 @@ if (!empty($_POST['confirm']) && $_POST['confirm'] == 'yes') {
     </tr>
     <tr valign='top' align='left'>
     <td class='odd'>
-    <b>"._AM_SH_REMOVE_FROM."</b>
+    <b>" . _AM_SH_REMOVE_FROM . "</b>
     </td>
     <td class='even'>
     $shout[ip]
@@ -71,7 +70,7 @@ if (!empty($_POST['confirm']) && $_POST['confirm'] == 'yes') {
     </tr>
     <tr valign='top' align='left'>
     <td class='odd'>
-    <b>"._AM_SH_MESSAGE."</b>
+    <b>" . _AM_SH_MESSAGE . "</b>
     </td>
     <td class='even'>
     $shout[message]
@@ -79,10 +78,10 @@ if (!empty($_POST['confirm']) && $_POST['confirm'] == 'yes') {
     </tr>
     <tr class='foot'>
     <td colspan='2' align='center'>
-    <input type='hidden' name='id' value='$shout[id]' />
-    <input type='hidden' name='confirm' value='yes' />
-    <input type='submit' name='submit' value='"._DELETE."' />
-    <input type='button' value='"._CANCEL."' onClick='location=\"index.php?op=shoutboxList\"' />
+    <input type='hidden' name='id' value='$shout[id]'>
+    <input type='hidden' name='confirm' value='yes'>
+    <input type='submit' name='submit' value='" . _DELETE . "'>
+    <input type='button' value='" . _CANCEL . "' onClick='location=\"main.php?op=shoutboxList\"'>
     </td>
     </tr>
     </tbody>

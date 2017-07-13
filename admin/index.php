@@ -10,45 +10,40 @@
  */
 
 /**
- * @copyright    The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
- * @version    $Id $
+ * @author       XOOPS Development Team
  */
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/include/cp_header.php';
-include_once dirname(__FILE__) . '/admin_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
 
-    $indexAdmin = new ModuleAdmin();
+$adminObject  = \Xmf\Module\Admin::getInstance();
 
 global $xoopsModuleConfig;
 
-$indexAdmin->addInfoBox(_AM_SHOUTBOX_CURRENT_SELECTION);
-if($xoopsModuleConfig['storage_type'] == 'database') {
-    $database = '['._AM_SH_EDIT_INUSE.']';
-    $file = '';
-    $imgDB="<img src='../images/on.png'>";
-    $imgFile="<img src='../images/off.png'>";
-    $indexAdmin->addInfoBoxLine(_AM_SHOUTBOX_CURRENT_SELECTION,
-        $imgDB."<a href='main.php?op=shoutboxList'>" . _AM_SH_EDIT_DB . "</a> $database", 0, 'Green'    );
-    $indexAdmin->addInfoBoxLine(_AM_SHOUTBOX_CURRENT_SELECTION,
-        $imgFile."<a href='main.php?op=shoutboxFile'>" . _AM_SH_EDIT_FILE . "</a> $file", 0, 'Green'    );
-} else if($xoopsModuleConfig['storage_type'] == 'file') {
+$adminObject->addInfoBox(_AM_SHOUTBOX_CURRENT_SELECTION);
+if ($xoopsModuleConfig['storage_type'] === 'database') {
+    $database = '[' . _AM_SH_EDIT_INUSE . ']';
+    $file     = '';
+    $imgDB    = "<img src='../assets/images/on.png'>";
+    $imgFile  = "<img src='../assets/images/off.png'>";
+    $adminObject->addInfoBoxLine(sprintf( $imgDB . "<a href='main.php?op=shoutboxList'>" . _AM_SH_EDIT_DB . "</a> $database", 0),'', 'Green');
+    $adminObject->addInfoBoxLine(sprintf( $imgFile . "<a href='main.php?op=shoutboxFile'>" . _AM_SH_EDIT_FILE . "</a> $file", 0), '','Green');
+} elseif ($xoopsModuleConfig['storage_type'] === 'file') {
     $database = '';
-    $file = '['._AM_SH_EDIT_INUSE.']';
-    $imgDB="<img src='../images/off.png'>";
-    $imgFile="<img src='../images/on.png'>";
-    $indexAdmin->addInfoBoxLine(_AM_SHOUTBOX_CURRENT_SELECTION,
-        $imgDB."<a href='main.php?op=shoutboxList'>" . _AM_SH_EDIT_DB . "</a> $database", 0, 'Green'    );
-    $indexAdmin->addInfoBoxLine(_AM_SHOUTBOX_CURRENT_SELECTION,
-        $imgFile."<a href='main.php?op=shoutboxFile'>" . _AM_SH_EDIT_FILE . "</a> $file", 0, 'Green'    );
+    $file     = '[' . _AM_SH_EDIT_INUSE . ']';
+    $imgDB    = "<img src='../assets/images/off.png'>";
+    $imgFile  = "<img src='../assets/images/on.png'>";
+    $adminObject->addInfoBoxLine(sprintf( $imgDB . "<a href='main.php?op=shoutboxList'>" . _AM_SH_EDIT_DB . "</a> $database", 0),'', 'Green');
+    $adminObject->addInfoBoxLine(sprintf( $imgFile . "<a href='main.php?op=shoutboxFile'>" . _AM_SH_EDIT_FILE . "</a> $file", 0),'', 'Green');
 }
 
-    echo $indexAdmin->addNavigation('index.php');
-    echo $indexAdmin->renderIndex();
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject->displayIndex();
 
-include "admin_footer.php";
+require_once __DIR__ . '/admin_footer.php';
