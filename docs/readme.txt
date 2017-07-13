@@ -25,7 +25,7 @@ interface by selecting Database or File as applicable.
 
 Modifying Guest Avatars
 You can replace the guest avatars supplied with the module release to your own
-creations. The files are located in the shoutbox/images/guestavatars/ subdirectory.
+creations. The files are located in the shoutbox/assets/images/guestavatars/ subdirectory.
 The files are labeled:
   guest1.gif
   guest2.gif
@@ -35,5 +35,5 @@ The files are labeled:
 Each image is 80px wide by 80px high.
 
 For defining display attributes of your shoutbox a style sheet has been provided.
-The file is /shoutbox/style/shoutbox.css
+The file is /shoutbox/assets/css/shoutbox.css
 You can open this file and change tag attribute definitions to suit your needs.

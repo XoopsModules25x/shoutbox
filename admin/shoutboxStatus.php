@@ -16,28 +16,27 @@
  * @author          Alphalogic <alphafake@hotmail.com>
  * @author          tank <tanksplace@comcast.net>
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: shoutboxStatus.php 0 2010-01-29 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_MAINFILE_INCLUDED") || !strstr($_SERVER['PHP_SELF'], 'admin/main.php')) {
+if (!defined('XOOPS_MAINFILE_INCLUDED') || false === strpos($_SERVER['PHP_SELF'], 'admin/main.php')) {
     exit();
 }
 
 // Count shouts in database and file
 // Database:
-$query = $xoopsDB->query("SELECT count(*) FROM ".$xoopsDB->prefix("shoutbox"));
-$query = $xoopsDB->fetchRow($query);
+$query          = $xoopsDB->query('SELECT count(*) FROM ' . $xoopsDB->prefix('shoutbox'));
+$query          = $xoopsDB->fetchRow($query);
 $count_database = $query[0];
 // File:
-$path = XOOPS_ROOT_PATH.'/uploads/shoutbox/shout.csv';
+$path       = XOOPS_ROOT_PATH . '/uploads/shoutbox/shout.csv';
 $count_file = count(file($path));
 
 // Size
 // Database:
 // [Source: http://www.webmasterworld.com/forum88/2069.htm]
-$rows = $xoopsDB->queryF("SHOW table STATUS");
+$rows = $xoopsDB->queryF('SHOW table STATUS');
 while ($row = $xoopsDB->fetchBoth($rows)) {
-    if($row['Name'] == $xoopsDB->prefix("shoutbox")) {
+    if ($row['Name'] == $xoopsDB->prefix('shoutbox')) {
         $size_database = $row['Data_length'] + $row['Index_length'];
     }
 }
@@ -48,13 +47,13 @@ echo "
 <table width='100%' class='outer' cellspacing='1'>
 <tbody>
 <tr>
-<th colspan='2'>"._AM_SH_STATUS_TITLE."</th>
+<th colspan='2'>" . _AM_SH_STATUS_TITLE . "</th>
 </tr>
 
 
 <tr valign='top' align='left'>
 <td class='odd'>
-<b>"._AM_SH_STATUS_STORAGETYPE."</b>
+<b>" . _AM_SH_STATUS_STORAGETYPE . "</b>
 </td>
 <td class='even'>
 $xoopsModuleConfig[storage_type]
@@ -63,7 +62,7 @@ $xoopsModuleConfig[storage_type]
 <tr valign='top' align='left'>
 <td class='odd'>
 <ul>
-<li>"._AM_SH_STATUS_INDB."</li>
+<li>" . _AM_SH_STATUS_INDB . "</li>
 </ul>
 </td>
 <td class='even'>
@@ -73,7 +72,7 @@ $count_database
 <tr valign='top' align='left'>
 <td class='odd'>
 <ul>
-<li>"._AM_SH_STATUS_INFILE."</li>
+<li>" . _AM_SH_STATUS_INFILE . "</li>
 </ul>
 </td>
 <td class='even'>
@@ -84,7 +83,7 @@ $count_file
 
 <tr valign='top' align='left'>
 <td class='odd'>
-<b>"._AM_SH_STATUS_SIZEDB."</b>
+<b>" . _AM_SH_STATUS_SIZEDB . "</b>
 </td>
 <td class='even'>
 $size_database bytes
@@ -92,7 +91,7 @@ $size_database bytes
 </tr>
 <tr valign='top' align='left'>
 <td class='odd'>
-<b>"._AM_SH_STATUS_SIZEFILE."</b>
+<b>" . _AM_SH_STATUS_SIZEFILE . "</b>
 </td>
 <td class='even'>
 $size_file bytes

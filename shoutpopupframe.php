@@ -16,54 +16,53 @@
  * @author          Alphalogic <alphafake@hotmail.com>
  * @author          tank <tanksplace@comcast.net>
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: shoutpopupframe.php 0 2010-01-29 18:47:04Z trabis $
  */
 
-include_once dirname(__FILE__) . '/header.php';
-include_once XOOPS_ROOT_PATH . '/modules/shoutbox/class/shoutbox.php';
-include_once XOOPS_ROOT_PATH . '/modules/shoutbox/include/functions.php';
+require_once __DIR__ . '/header.php';
+require_once XOOPS_ROOT_PATH . '/modules/shoutbox/class/shoutbox.php';
+require_once XOOPS_ROOT_PATH . '/modules/shoutbox/class/utility.php';
 
 $shoutbox = new Shoutbox($xoopsModuleConfig['storage_type']);
 
-$online_handler =& xoops_gethandler('online');
-mt_srand((double)microtime()*1000000);
+$onlineHandler = xoops_getHandler('online');
+mt_srand((double)microtime() * 1000000);
 // set gc probability to 10% for now..
 if (mt_rand(1, 100) < 11) {
-    $online_handler->gc(300);
+    $onlineHandler->gc(300);
 }
 
 if (is_object($xoopsUser)) {
-    $uid = $xoopsUser->getVar('uid');
-    $uname = shoutbox_getUserName($uid);
+    $uid   = $xoopsUser->getVar('uid');
+    $uname = ShoutboxUtility::getUserName($uid);
 } else {
-    $uid = 0;
+    $uid   = 0;
     $uname = '';
 }
 
-$online_handler->write($uid, $uname, time(), $xoopsModule->getVar('mid'), $_SERVER['REMOTE_ADDR']);
+$onlineHandler->write($uid, $uname, time(), $xoopsModule->getVar('mid'), $_SERVER['REMOTE_ADDR']);
 
-$addit=1;
-$special_stuff_head='';
-$lastmine=0;
-$double=0;
-$newmessage=0;
+$addit              = 1;
+$special_stuff_head = '';
+$lastmine           = 0;
+$double             = 0;
+$newmessage         = 0;
 
-$addit = true;
-$double = false;
+$addit   = true;
+$double  = false;
 $message = !empty($_POST['message']) ? trim($_POST['message']) : '';
 
-$isUser = is_object($xoopsUser);
+$isUser      = is_object($xoopsUser);
 $isAnonymous = !$isUser && $xoopsModuleConfig['guests_may_post'];
-$isMessage = !empty($message);
+$isMessage   = !empty($message);
 if ($isMessage && ($isUser || $isAnonymous)) {
     //Populate uid and name and verify captcha
     if ($isAnonymous) {
-        $uid = 0;
+        $uid        = 0;
         $post_uname = isset($_POST['uname']) ? trim($_POST['uname']) : '';
         if ($xoopsModuleConfig['guests_may_chname'] && !empty($post_uname)) {
             $uname = $post_uname;
         } else {
-            $uname = shoutbox_makeGuestName();
+            $uname = ShoutboxUtility::makeGuestName();
         }
         /* if ($xoopsModuleConfig['captcha_enable']) {
          xoops_load('XoopsCaptcha');
@@ -76,8 +75,8 @@ if ($isMessage && ($isUser || $isAnonymous)) {
          }
          }*/
     } else {
-        $uid = $xoopsUser->getVar('uid');
-        $uname = shoutbox_getUserName($uid);
+        $uid   = $xoopsUser->getVar('uid');
+        $uname = ShoutboxUtility::getUserName($uid);
     }
     //check if it is a double post
     if ($addit && $shoutbox->shoutExists($message)) {
@@ -86,8 +85,8 @@ if ($isMessage && ($isUser || $isAnonymous)) {
     }
 
     // Enable IRC Commands
-    if($xoopsModuleConfig['popup_irc']==1 && isset($message) && strstr($message, '/')) {
-        if(shoutbox_ircLike($message)) {
+    if ($xoopsModuleConfig['popup_irc'] == 1 && isset($message) && false !== strpos($message, '/')) {
+        if (ShoutboxUtility::ircLike($message)) {
             unset($message);
             $addit = false;
             $xoopsTpl->assign('refresh', true);
@@ -102,14 +101,12 @@ if ($isMessage && ($isUser || $isAnonymous)) {
 }
 
 /*
- if($shouts = file($shoutbox->csvfile))
- {
+ if ($shouts = file($shoutbox->csvfile)) {
  $totalshouts = count($shouts);
  }
 
  // Check or there is a new message
- if(!empty($shouts))
- {
+ if (!empty($shouts)) {
  $oneline = explode("|", $shouts[$totalshouts-1]);
 
  /*
@@ -118,16 +115,13 @@ if ($isMessage && ($isUser || $isAnonymous)) {
  echo '$time() ='.time()."<br \>\n";
  */
 /*
- if($xoopsUser && $xoopsUser->uname() == $oneline[0])
- {
+ if ($xoopsUser && $xoopsUser->uname() == $oneline[0]) {
  $lastmine=1;
- }elseif(!empty($username) && $username == $oneline[0])
- {
+ } elseif (!empty($username) && $username == $oneline[0]) {
  $lastmine=1;
  }
 
- if(shoutbox_setCookie($oneline[2]) && $lastmine==0)
- {
+ if (ShoutboxUtility::setCookie($oneline[2]) && $lastmine==0) {
  $newmessage = 1;
  }
  }
@@ -146,4 +140,4 @@ $xoopsTpl->assign('newmessage', $newmessage);
 $xoopsTpl->assign('config', $xoopsModuleConfig);
 
 $xoopsTpl->xoops_setCaching(0);
-$xoopsTpl->display('db:shoutbox_popupframe.html');
+$xoopsTpl->display('db:shoutbox_popupframe.tpl');

@@ -16,24 +16,33 @@
  * @author          Alphalogic <alphafake@hotmail.com>
  * @author          tank <tanksplace@comcast.net>
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: shoutbox.php 0 2010-01-29 18:47:04Z trabis $
  */
 
-include_once dirname(dirname(__FILE__)) . '/include/functions.php';
+require_once __DIR__ . '/utility.php';
 
-class Shoutbox
+/**
+ * Class shoutbox
+ */
+class shoutbox
 {
-    var $handler = '';
+    public $handler = '';
 
-    function Shoutbox($storage_type)
+    /**
+     * shoutbox constructor.
+     * @param $storage_type
+     */
+    public function __construct($storage_type)
     {
-        $this->handler =& xoops_getModuleHandler($storage_type, 'shoutbox');
+        $this->handler = xoops_getModuleHandler($storage_type, 'shoutbox');
     }
 
-    function getDefaultAvatar()
+    /**
+     * @return string
+     */
+    public function getDefaultAvatar()
     {
-        if ($value = shoutbox_getOption('guest_avatar')) {
-            $avatar = XOOPS_URL . "/modules/shoutbox/images/guestavatars/guest" . $value . ".gif";
+        if ($value = ShoutboxUtility::getOption('guest_avatar')) {
+            $avatar = XOOPS_URL . '/modules/shoutbox/assets/images/guestavatars/guest' . $value . '.gif';
         } else {
             $avatar = XOOPS_URL . '/uploags/blank.gif';
         }
@@ -41,14 +50,20 @@ class Shoutbox
         return $avatar;
     }
 
-    function saveShout($uid, $uname, $message)
+    /**
+     * @param $uid
+     * @param $uname
+     * @param $message
+     * @return bool
+     */
+    public function saveShout($uid, $uname, $message)
     {
         $myts = MyTextSanitizer::getInstance();
-        $obj = $this->handler->createShout();
+        $obj  = $this->handler->createShout();
         $obj->setVar('uid', $uid);
         $obj->setVar('uname', $uname);
         $obj->setVar('time', time());
-        $obj->setVar('ip', getenv("REMOTE_ADDR"));
+        $obj->setVar('ip', getenv('REMOTE_ADDR'));
         $obj->setVar('message', $message);
 
         if (!$this->handler->saveShout($obj)) {
@@ -58,29 +73,35 @@ class Shoutbox
         return true;
     }
 
-    function getShouts($online, $bbcode, $limit)
+    /**
+     * @param $online
+     * @param $bbcode
+     * @param $limit
+     * @return array
+     */
+    public function getShouts($online, $bbcode, $limit)
     {
         global $xoopsUser;
         $shouts = array();
-        $myts = MyTextSanitizer::getInstance();
-        $objs = $this->handler->getShouts($limit);
-        $i = 0;
+        $myts   = MyTextSanitizer::getInstance();
+        $objs   = $this->handler->getShouts($limit);
+        $i      = 0;
         foreach ($objs as $obj) {
-            $uid = $obj->getVar('uid');
-            $shouts[$i]['uid'] = $uid;
+            $uid                  = $obj->getVar('uid');
+            $shouts[$i]['uid']    = $uid;
             $shouts[$i]['online'] = 0;
-            $shouts[$i]['url'] = '';
-            $shouts[$i]['email'] = '';
+            $shouts[$i]['url']    = '';
+            $shouts[$i]['email']  = '';
             $shouts[$i]['avatar'] = $this->getDefaultAvatar();
-            $shouts[$i]['uname'] = $obj->getVar('uname');
-            $shouts[$i]['time'] = $obj->time(shoutbox_getOption('stamp_format'));
-            $shouts[$i]['ip'] = $obj->getVar('ip');
+            $shouts[$i]['uname']  = $obj->getVar('uname');
+            $shouts[$i]['time']   = $obj->time(ShoutboxUtility::getOption('stamp_format'));
+            $shouts[$i]['ip']     = $obj->getVar('ip');
 
             $obj->setVar('doxcode', $bbcode);
 
             $shouts[$i]['message'] = $myts->censorString($obj->getVar('message'));
-            if ($wordwrap = shoutbox_getOption('wordwrap_setting')) {
-                $shouts[$i]['message'] = wordwrap($shouts[$i]['message'], $wordwrap ,"\r\n", true);
+            if ($wordwrap = ShoutboxUtility::getOption('wordwrap_setting')) {
+                $shouts[$i]['message'] = wordwrap($shouts[$i]['message'], $wordwrap, "\r\n", true);
             }
 
             if ($uid != 0) {
@@ -88,21 +109,25 @@ class Shoutbox
                 if ($thisUser->isOnline()) {
                     $shouts[$i]['online'] = 1;
                 }
-                if ($thisUser->getVar("url") != "") {
-                    $shouts[$i]['url'] = $thisUser->getVar("url");
+                if ($thisUser->getVar('url') !== '') {
+                    $shouts[$i]['url'] = $thisUser->getVar('url');
                 }
-                if ($thisUser->getVar("user_viewemail") == 1 || ($xoopsUser && $xoopsUser->isAdmin())) {
-                    $shouts[$i]['email'] = $thisUser->getVar("email");
+                if ($thisUser->getVar('user_viewemail') == 1 || ($xoopsUser && $xoopsUser->isAdmin())) {
+                    $shouts[$i]['email'] = $thisUser->getVar('email');
                 }
-                $shouts[$i]['avatar'] = XOOPS_URL . '/uploads/' . $thisUser->getVar("user_avatar");
+                $shouts[$i]['avatar'] = XOOPS_URL . '/uploads/' . $thisUser->getVar('user_avatar');
             }
-            $i++;
+            ++$i;
         }
 
         return $shouts;
     }
 
-    function pruneShouts($limit)
+    /**
+     * @param $limit
+     * @return bool
+     */
+    public function pruneShouts($limit)
     {
         if ($limit > 0) {
             return $this->handler->pruneShouts($limit);
@@ -111,7 +136,10 @@ class Shoutbox
         return false;
     }
 
-    function deleteShouts()
+    /**
+     * @return bool
+     */
+    public function deleteShouts()
     {
         global $xoopsUser;
         if (!empty($xoopsUser) && $xoopsUser->isAdmin()) {
@@ -121,9 +149,12 @@ class Shoutbox
         return false;
     }
 
-    function shoutExists($message)
+    /**
+     * @param $message
+     * @return mixed
+     */
+    public function shoutExists($message)
     {
-        return $this->handler->shoutExists($message, getenv("REMOTE_ADDR"));
+        return $this->handler->shoutExists($message, getenv('REMOTE_ADDR'));
     }
-
 }
